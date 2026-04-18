@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text to Human-Readable Pipeline</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🤖 → 👤 AI Text Converter</h1>
+            <p>Transform AI-generated text into human-readable prose while preserving compliance</p>
+        </header>
+
+        <!-- Mode Selector -->
+        <section class="mode-selector">
+            <h2>Select Conversion Mode</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn active" data-mode="humanize">
+                    <span class="mode-icon">📝</span>
+                    <span class="mode-label">Humanize</span>
+                    <span class="mode-desc">Make text conversational</span>
+                </button>
+                <button class="mode-btn" data-mode="architect">
+                    <span class="mode-icon">🏗️</span>
+                    <span class="mode-label">Architect</span>
+                    <span class="mode-desc">Design documentation systems</span>
+                </button>
+                <button class="mode-btn" data-mode="compliance">
+                    <span class="mode-icon">✅</span>
+                    <span class="mode-label">Compliance</span>
+                    <span class="mode-desc">Check regulatory requirements</span>
+                </button>
+                <button class="mode-btn" data-mode="designer">
+                    <span class="mode-icon">🎨</span>
+                    <span class="mode-label">Designer</span>
+                    <span class="mode-desc">Create content structure</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- API Usage Dashboard -->
+        <section class="api-dashboard">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="margin: 0;">API Key Usage & Status</h2>
+                <button id="refresh-usage-btn" class="btn btn-small" title="Refresh usage stats">
+                    🔄 Refresh
+                </button>
+            </div>
+            <div class="usage-grid">
+                <!-- Key 1 -->
+                <div class="usage-card">
+                    <div class="usage-header">
+                        <h3>🔑 API Key 1</h3>
+                        <button class="btn-small" id="primary-key-btn-1">
+                            <span id="primary-indicator-1"></span>
+                        </button>
+                    </div>
+                    <div class="usage-bar">
+                        <div class="usage-fill" id="usage-fill-1"></div>
+                    </div>
+                    <div class="usage-info">
+                        <span id="usage-text-1">Tokens: 0 / 100,000</span>
+                        <span id="usage-status-1" class="status-badge">Good</span>
+                    </div>
+                    <small id="usage-meta-1">0 calls</small>
+                </div>
+
+                <!-- Key 2 -->
+                <div class="usage-card">
+                    <div class="usage-header">
+                        <h3>🔑 API Key 2</h3>
+                        <button class="btn-small" id="primary-key-btn-2">
+                            <span id="primary-indicator-2"></span>
+                        </button>
+                    </div>
+                    <div class="usage-bar">
+                        <div class="usage-fill" id="usage-fill-2"></div>
+                    </div>
+                    <div class="usage-info">
+                        <span id="usage-text-2">Tokens: 0 / 100,000</span>
+                        <span id="usage-status-2" class="status-badge">Good</span>
+                    </div>
+                    <small id="usage-meta-2">0 calls</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model & Settings Selector -->
+        <section class="model-selector">
+            <h2>Choose AI Model & Settings</h2>
+            <div class="settings-grid">
+                <div class="setting-group">
+                    <label for="model-select">AI Model:</label>
+                    <select id="model-select">
+                        <option value="">Loading models...</option>
+                    </select>
+                    <div id="model-info" class="model-info"></div>
+                </div>
+                <div class="setting-group">
+                    <label for="temperature">Creativity Level:</label>
+                    <div class="temperature-control">
+                        <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.7">
+                        <span id="temp-display">0.7</span>
+                    </div>
+                    <small>0 = Precise, 1 = Creative</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="main-content">
+            <div class="input-section">
+                <label for="input-text">Paste your text here:</label>
+                <textarea id="input-text" placeholder="Paste AI-generated text or your content here..."></textarea>
+                <div class="input-controls">
+                    <button id="convert-btn" class="btn btn-primary">✨ Convert</button>
+                    <button id="clear-btn" class="btn btn-secondary">🗑️ Clear</button>
+                    <span id="char-count" class="char-count">0 characters</span>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="output-header">
+                    <label for="output-text">Converted Output:</label>
+                    <button id="copy-btn" class="btn btn-small">📋 Copy</button>
+                </div>
+                <textarea id="output-text" readonly placeholder="Converted text will appear here..."></textarea>
+            </div>
+        </section>
+
+        <!-- Status & Loading -->
+        <div id="status" class="status hidden"></div>
+
+        <!-- History -->
+        <section class="history-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="margin: 0;">Recent Conversions</h2>
+                <button id="clear-history-btn" class="btn btn-small" title="Clear all history">
+                    🗑️ Clear History
+                </button>
+            </div>
+            <div id="history" class="history-list"></div>
+        </section>
+    </div>
+
+    <!-- Modal for detailed view -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
