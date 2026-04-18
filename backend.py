@@ -11,8 +11,8 @@ from models_config import get_all_models, DEFAULT_MODEL, get_models_by_category
 from conversion_prompts import (
     HUMANIZER_PROMPT,
     ARCHITECT_PROMPT,
-    COMPLIANCE_CHECKER,
-    DOCUMENTATION_DESIGNER
+    COMPLIANCE_PROMPT,
+    DOCUMENTATION_PROMPT
 )
 
 app = FastAPI(title="AI Text to Human-Readable Pipeline")
@@ -39,8 +39,8 @@ class ConversionResponse(BaseModel):
 PROMPTS = {
     "humanize": HUMANIZER_PROMPT,
     "architect": ARCHITECT_PROMPT,
-    "compliance": COMPLIANCE_CHECKER,
-    "designer": DOCUMENTATION_DESIGNER
+    "compliance": COMPLIANCE_PROMPT,
+    "designer": DOCUMENTATION_PROMPT
 }
 
 @app.get("/")
